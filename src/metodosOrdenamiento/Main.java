@@ -13,5 +13,13 @@ public class Main {
 		ordenar.ordenamientoInsercion(vec);
 		for(int v : vec)
 			System.out.print(v);
+		System.out.println();
+		  int arr[] = {10, 7, 8, 9, 1, 5}; 
+	        int n = arr.length; 
+	        ordenar.quickSort(arr, 0, n-1);
+	   
+			for(int v : arr)
+				System.out.print(v);
+	 
+	    } 
 	}
-}
