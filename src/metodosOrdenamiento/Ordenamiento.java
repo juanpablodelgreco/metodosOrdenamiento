@@ -64,18 +64,26 @@ public class Ordenamiento {
 	//NO SENSIBLE -> DEPENDE DE LA ELECCION DEL PIVOTE
 	//NO ESTABLE
 	 //O(n*log n)
-		public static void quicksort(int vec[], int izq, int der) {
-
+		public void ordenamientoQuickSort() {
+			quicksort(vec, 0, vec.length-1);
+		}
+		private void quicksort(int vec[], int izq, int der) {
+		
 			int pivote = vec[izq]; // tomamos primer elemento como pivote
 			int i = izq; // i realiza la búsqueda de izquierda a derecha
 			int j = der; // j realiza la búsqueda de derecha a izquierda
 			int aux;
-
 			while (i < j) { // mientras no se crucen las búsquedas
-				while (vec[i] <= pivote && i < j)
+				while (vec[i] <= pivote && i < j){
 					i++; // busca elemento mayor que pivote
-				while (vec[j] > pivote)
+					System.out.print("->I:"+ i+" ");
+				}
+				System.out.println();
+				while (vec[j] > pivote) {
 					j--; // busca elemento menor que pivote
+					System.out.print("->J:"+ j+" ");
+				}
+				System.out.println();
 				if (i < j) { // si no se han cruzado
 					aux = vec[i]; // los intercambia
 					vec[i] = vec[j];
@@ -84,6 +92,8 @@ public class Ordenamiento {
 			}
 			vec[izq] = vec[j]; // se coloca el pivote en su lugar de forma que tendremos
 			vec[j] = pivote; // los menores a su izquierda y los mayores a su derecha
+			System.out.println("Pivote: "+pivote);
+			System.out.println("--------");
 			if (izq < j - 1)
 				quicksort(vec, izq, j - 1); // ordenamos subarray izquierdo
 			if (j + 1 < der)
