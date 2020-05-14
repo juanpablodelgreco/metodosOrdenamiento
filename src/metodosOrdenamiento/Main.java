@@ -2,24 +2,10 @@ package metodosOrdenamiento;
 
 public class Main {
 	public static void main(String[] args) {
-		Ordenamiento ordenar = new Ordenamiento();
-		int[] vec = {3,1,2,6,4,5};
-		for(int v : vec)
-			System.out.print(v);
-		System.out.println();
-		System.out.println("---------------");
-		//ordenar.ordenamientoBurbuja(vec);
-		//ordenar.ordenamientoSeleccion(vec);
-		ordenar.ordenamientoInsercion(vec);
-		for(int v : vec)
-			System.out.print(v);
-		System.out.println();
-		  int arr[] = {10, 7, 8, 9, 1, 5}; 
-	        int n = arr.length; 
-	        ordenar.quickSort(arr, 0, n-1);
-	   
-			for(int v : arr)
-				System.out.print(v);
-	 
-	    } 
+		int[] vec = { 4, 2, 1, 7,9,11,3,1,5,8,17,1,25,99,191 };
+		int[] vec2 = { 1,2,3,4,5,6,7};
+		Ordenamiento ordenar = new Ordenamiento(vec);
+		ordenar.ordenamientoInsercion();
+		System.out.println(ordenar);
 	}
+}

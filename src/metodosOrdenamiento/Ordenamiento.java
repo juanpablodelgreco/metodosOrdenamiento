@@ -1,61 +1,66 @@
 package metodosOrdenamiento;
 
-public class Ordenamiento {
+import java.util.Arrays;
 
+public class Ordenamiento {
+	private int[] vec;
+	
+	public Ordenamiento(int[] vec) {
+		this.vec = vec;
+	}
 	//Todos los algoritmos tienen una complegidad de O(N*N)
 	//SENSIBLE = MODIFICA SU TIEMPO EN EJECUCION SEGUN EL TIPO DE ENTRADA.
 	//ESTABLE = ANTE CLAVES IGUALES MANTIENE EL MISMO ORDEN.
 	
 	//SENSIBLE-ESTABLE
-	//si el que sigue es menor al actual lo cambia
-	public void ordenamientoBurbuja(int[] vec) {
-		int i = 1, aux;
-		boolean ordenado = false;
-		while (i < vec.length && ordenado == false) {
-			i++;
-			ordenado = true;
+	//Si el que sigue es menor al actual lo cambia
+	public void ordenamientoBurbuja() {
+		int i = 0, huboCambio = 1, aux = 0;
+		while (i < vec.length - 1 && huboCambio == 1) {
+			huboCambio = 0;
 			for (int j = 0; j < vec.length - 1; j++) {
 				if (vec[j] > vec[j + 1]) {
-					ordenado = false;
-					aux = vec[j + 1];
-					vec[j + 1] = vec[j];
+					aux = vec[j];
+					vec[j] = vec[j + 1];
+					vec[j + 1] = aux;
+					huboCambio = 1;
+				}
+			}
+			i++;
+		}
+	}
+	
+	//NO SENSIBLE-NO ESTABLE
+	//Elige el menor y lo manda adelante de todo
+	public void ordenamientoSeleccion() {
+		int menor, aux;
+		for (int i = 0; i < vec.length - 1; i++) {
+			menor = i;
+			for (int j = i + 1; j < vec.length; j++)
+				if (vec[j] < vec[menor])
+					menor = j;
+			aux = vec[i];
+			vec[i] = vec[menor];
+			vec[menor] = aux;
+		}
+	}
+
+	//SENSIBLE-ESTABLE
+	//ordeno desde una posicion todos los anteriores
+	public void ordenamientoInsercion() {
+		int actual, aux;
+		for (int i = 0; i < vec.length; i++) {
+			actual = i;
+			for (int j = 0; j < i; j++) {
+				if (vec[actual] < vec[j]) {
+					aux = vec[actual];
+					vec[actual] = vec[j];
 					vec[j] = aux;
 				}
 			}
 		}
 	}
 	
-	//NO ESTABLE-NO SENSIBLE
-	//elige el menor y lo manda adelante de todo
-	public void ordenamientoSeleccion(int[] vec) {
-		int n = vec.length;
-		for (int i = 0; i < n - 1; i++) {
-			int menor = i;
-			for (int j = i + 1; j < n; j++)
-				if (vec[j] < vec[menor])
-					menor = vec[j];
-			int aux = vec[i];
-			vec[i] = vec[menor];
-			vec[menor] = aux;
-
-		}
-	}
-	
-	//SENSIBLE-ESTABLE
-	//ordeno desde una posicion todos los anteriores
-	public void OrdenarPorInsercion(int[] vec) {
-		int i, j; // Índices sobre la lista.
-		int aux; // Variable auxiliar para el intercambio de valores.
-
-		for (i = 1; i < 100; i++) { // ¡Ojo! Empezamos en 1
-			aux = vec[i]; // Guardamos el valor a ordenar.
-			j = i - 1;
-			while ((j >= 0) && vec[j] > aux) // Siempre que sea mayor que aux.
-				// ordenamos de menor a mayor.
-				vec[j + 1] = vec[j--]; // Trasladamos el valor y movemos el indice.
-			vec[j + 1] = aux; // Ponemos el valor a ordenar en su sitio.
-		}
-	}
 	//NO SENSIBLE -> DEPENDE DE LA ELECCION DEL PIVOTE
 	//NO ESTABLE
 	 //O(n*log n)
@@ -84,5 +89,12 @@ public class Ordenamiento {
 			if (j + 1 < der)
 				quicksort(vec, j + 1, der); // ordenamos subarray derecho
 		}
+
+		@Override
+		public String toString() {
+			return "Ordenamiento [vec=" + Arrays.toString(vec) + "]";
+		}
+		
+		
 
 }
